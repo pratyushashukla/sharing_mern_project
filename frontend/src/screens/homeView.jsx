@@ -36,7 +36,7 @@ const HomeView = ({ match, history }) => {
 
   return (
     <>
-      <>
+      {/* <>
         <Container>
           <Row className="justify-content-md-center">
             <Col xs lg="2"></Col>
@@ -62,7 +62,7 @@ const HomeView = ({ match, history }) => {
             <Col xs lg="2"></Col>
           </Row>
         </Container>
-      </>
+      </> */}
 
       <h1>Students</h1>
       {loading ? (

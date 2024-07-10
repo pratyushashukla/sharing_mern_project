@@ -74,7 +74,7 @@ const AnalysisView = () => {
       <Col>
         <Row>
           <Col>
-            <Row>Analysis for </Row>
+            <Row>Attendance Report for </Row>
             <strong>
               {startDate.toISOString().toString().substring(0, 10)}
             </strong>

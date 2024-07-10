@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Loading from "./loader";
 import Message from "./message";
@@ -63,7 +63,8 @@ const AnalysisComponent = () => {
                     })}
                 </tbody>
               </Table>
-              <CSVLink
+              <Button variant="primary">Download Report</Button>
+              {/* <CSVLink
                 data={data}
                 headers={headers}
                 filename={`attendance_${Date()
@@ -72,7 +73,7 @@ const AnalysisComponent = () => {
                 className="btn btn-primary"
               >
                 Download
-              </CSVLink>
+              </CSVLink> */}
             </>
           )}
         </>

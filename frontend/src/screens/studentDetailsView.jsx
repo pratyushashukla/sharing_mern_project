@@ -19,8 +19,10 @@ import {
 } from "../actions/studentActions";
 import { STUDENT_UPDATE_RESET } from "../constants/studentConstant";
 const StudentDetailsView = ({ match, history }) => {
+
   const [status, setStatus] = useState("");
   const dispatch = useDispatch();
+  
   const studentDetails = useSelector((state) => state.studentDetails);
   const { loading, error, student } = studentDetails;
   const studentUpdate = useSelector((state) => state.studentUpdate);
@@ -123,7 +125,8 @@ const StudentDetailsView = ({ match, history }) => {
                       <Row>
                         <Col>Status:</Col>
                         <Col>
-                          <Form.Control
+                        {student.status}
+                          {/* <Form.Control
                             size="sm"
                             as="select"
                             value={status}
@@ -134,11 +137,11 @@ const StudentDetailsView = ({ match, history }) => {
                                 {x}
                               </option>
                             ))}
-                          </Form.Control>
+                          </Form.Control> */}
                         </Col>
                       </Row>
                     </ListGroup.Item>
-                    <ListGroup.Item>
+                    {/* <ListGroup.Item>
                       <Button
                         className="btn-block"
                         type="button"
@@ -146,7 +149,7 @@ const StudentDetailsView = ({ match, history }) => {
                       >
                         Update
                       </Button>
-                    </ListGroup.Item>
+                    </ListGroup.Item> */}
                   </ListGroup>
                 </Card>
               </Col>
@@ -154,12 +157,16 @@ const StudentDetailsView = ({ match, history }) => {
                 <ListGroup variant="flush">
                   <Row>
                     <ListGroup.Item variant="secondary">
-                      <Button onClick={navigateToEdit}>
+                      <Button 
+                      // onClick={navigateToEdit}
+                      >
                         <i className="fas fa-edit"></i>
                       </Button>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <Button variant="danger" onClick={deleteStuden}>
+                      <Button variant="danger" 
+                      // onClick={deleteStuden}
+                      >
                         <i className="fas fa-trash"></i>
                       </Button>
                     </ListGroup.Item>
