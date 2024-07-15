@@ -19,10 +19,9 @@ import {
 } from "../actions/studentActions";
 import { STUDENT_UPDATE_RESET } from "../constants/studentConstant";
 const StudentDetailsView = ({ match, history }) => {
-
   const [status, setStatus] = useState("");
   const dispatch = useDispatch();
-  
+
   const studentDetails = useSelector((state) => state.studentDetails);
   const { loading, error, student } = studentDetails;
   const studentUpdate = useSelector((state) => state.studentUpdate);
@@ -125,19 +124,20 @@ const StudentDetailsView = ({ match, history }) => {
                       <Row>
                         <Col>Status:</Col>
                         <Col>
-                        {student.status}
-                          {/* <Form.Control
-                            size="sm"
-                            as="select"
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
-                          >
-                            {["Hostel", "Outside", "Home"].map((x) => (
-                              <option key={x} value={x}>
-                                {x}
-                              </option>
-                            ))}
-                          </Form.Control> */}
+                          {
+                            <Form.Control
+                              size="sm"
+                              as="select"
+                              value={status}
+                              onChange={(e) => setStatus(e.target.value)}
+                            >
+                              {["Present", "Absent"].map((x) => (
+                                <option key={x} value={x}>
+                                  {x}
+                                </option>
+                              ))}
+                            </Form.Control>
+                          }
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -157,15 +157,16 @@ const StudentDetailsView = ({ match, history }) => {
                 <ListGroup variant="flush">
                   <Row>
                     <ListGroup.Item variant="secondary">
-                      <Button 
+                      <Button
                       // onClick={navigateToEdit}
                       >
                         <i className="fas fa-edit"></i>
                       </Button>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <Button variant="danger" 
-                      // onClick={deleteStuden}
+                      <Button
+                        variant="danger"
+                        // onClick={deleteStuden}
                       >
                         <i className="fas fa-trash"></i>
                       </Button>
