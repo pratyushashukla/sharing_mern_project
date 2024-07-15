@@ -21,7 +21,7 @@ const AddStudentView = () => {
   const [image, setImage] = useState("");
   const [roomNo, setRoomNo] = useState("");
   const [blockNo, setBlockNo] = useState("");
-  const [status, setStatus] = useState("Hostel");
+  const [status, setStatus] = useState("Absent");
 
   const dispatch = useDispatch();
   const studentAdd = useSelector((state) => state.studentAdd);
@@ -125,8 +125,8 @@ const AddStudentView = () => {
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
               >
-                {["Hostel", "Outside", "Home"].map((x) => (
-                  <option key={x + 1} value={x + 1}>
+                {["Present", "Absent"].map((x) => (
+                  <option key={x + 1} value={x}>
                     {x}
                   </option>
                 ))}

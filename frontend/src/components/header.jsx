@@ -18,10 +18,10 @@ const Header = ({ history }) => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Group J Project</Navbar.Brand>
+            <Navbar.Brand>Hostel Management System</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -32,10 +32,10 @@ const Header = ({ history }) => {
             )}
             <Nav className="ml-auto">
               {userInfo && (
-                <NavDropdown title="More">
-                  {/* <LinkContainer to="/attendance"> */}
-                    <NavDropdown.Item>Attendance</NavDropdown.Item>
-                  {/* </LinkContainer> */}
+                <NavDropdown title="More" id="more">
+                  <LinkContainer to="/attendance">
+                    <NavDropdown.Item>Take Attendance</NavDropdown.Item>
+                  </LinkContainer>
                   {/* <LinkContainer to="/addStudent"> */}
                     <NavDropdown.Item>Add Student</NavDropdown.Item>
                   {/* </LinkContainer> */}

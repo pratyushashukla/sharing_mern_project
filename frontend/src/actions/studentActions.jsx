@@ -20,39 +20,39 @@ import {
 } from "../constants/studentConstant";
 import axios from "axios";
 
-export const listStudents = (keyword = "", pageNumber = "") => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({ type: STUDENT_LIST_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
+export const listStudents =
+  (keyword = "", pageNumber = "") =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({ type: STUDENT_LIST_REQUEST });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.get(
-      `/student/all?keyword=${keyword}&pageNumber=${pageNumber}`,
-      config
-    );
-    dispatch({
-      type: STUDENT_LIST_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: STUDENT_LIST_ERROR,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      const { data } = await axios.get(
+        `/student/all?keyword=${keyword}&pageNumber=${pageNumber}`,
+        config
+      );
+
+      dispatch({
+        type: STUDENT_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: STUDENT_LIST_ERROR,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const addStudent = (student) => async (dispatch, getState) => {
   try {
@@ -175,6 +175,14 @@ export const deleteStudent = (id) => async (dispatch, getState) => {
 
 export const getStudentsByRoomNo = (roomNo) => async (dispatch, getState) => {
   try {
+    if (!roomNo) {
+      dispatch({
+        type: STUDENT_ROOM_NO_ERROR,
+        payload: "Please enter room number",
+      });
+      return;
+    }
+
     dispatch({ type: STUDENT_ROOM_NO_REQUEST });
     const {
       userLogin: { userInfo },

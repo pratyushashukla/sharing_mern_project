@@ -1,0 +1,27 @@
+/* custom.css */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .btn-outline-primary {
+    margin-right: 5px;
+  }
+  
+  .btn-outline-primary:checked {
+    background-color: #007bff;
+    color: white;
+  }
+  
