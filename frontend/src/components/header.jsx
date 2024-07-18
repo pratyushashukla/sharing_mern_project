@@ -5,13 +5,17 @@ import { LinkContainer } from "react-router-bootstrap";
 import SearchBox from "./searchBox";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
+import { useHistory } from 'react-router-dom';
 
-const Header = ({ history }) => {
+const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+
   const logoutHandler = () => {
+    console.log(history);
     dispatch(logout());
     history.push("/login");
   };

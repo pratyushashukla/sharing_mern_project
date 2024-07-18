@@ -13,7 +13,6 @@ import AttendanceView from "./screens/attendanceView";
 import ProfileView from "./screens/profileView";
 import UserListView from "./screens/userListView";
 import UserEditView from "./screens/userEditView";
-import "./css/custom.css";
 
 const App = () => {
   return (
@@ -29,7 +28,7 @@ const App = () => {
           <Route path="/addStudent" component={AddStudentView} />
           <Route path="/student/edit/:id" component={AddStudentView} exact />
           <Route path="/student/:id" component={StudentDetailsView} exact />
-          <Route path="/login" component={LoginView} exact />
+          <Route path="/login" component={LoginView} />
           <Route path="/register" component={RegisterView} exact />
           <Route path="/search/:keyword" component={HomeView} exact />
           <Route path="/page/:pageNumber" component={HomeView} exact />
