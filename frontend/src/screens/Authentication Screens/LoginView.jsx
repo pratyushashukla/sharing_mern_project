@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col, Card } from "react-bootstrap";
+import { Form, Button, Row, Col , Card} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/message";
 import Loader from "../../components/loader";
@@ -10,6 +10,7 @@ import { login } from "../../actions/userActions";
 const LoginView = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [stayLoggedIn, setStayLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -20,14 +21,25 @@ const LoginView = ({ location, history }) => {
 
   useEffect(() => {
     if (userInfo) {
+      if (stayLoggedIn) {
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      }
       history.push(redirect);
     }
-  }, [history, userInfo, redirect]);
+  }, [history, userInfo, redirect, stayLoggedIn]);
+
+  useEffect(() => {
+    const savedUserInfo = localStorage.getItem('userInfo');
+    if (savedUserInfo) {
+      dispatch({ type: 'USER_LOGIN_SUCCESS', payload: JSON.parse(savedUserInfo) });
+    }
+  }, [dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    dispatch(login(email, password, stayLoggedIn));
   };
+
 
   return (
     <FormContainer>
@@ -54,7 +66,17 @@ const LoginView = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' variant='primary'>
+
+        <Form.Group controlId="stayLoggedIn">
+          <Form.Check 
+            type="checkbox"
+            label="Stay logged in"
+            checked={stayLoggedIn}
+            onChange={(e) => setStayLoggedIn(e.target.checked)}
+          ></Form.Check>
+        </Form.Group>
+
+        <Button type="submit" variant="primary">
           Sign In
         </Button>
       </Form>
