@@ -6,14 +6,14 @@ import SearchBox from "./searchBox";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 
-const Header = ({ history }) => {
+const Header = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const logoutHandler = () => {
     dispatch(logout());
-    history.push("/login");
+    window.location.href = '/login';
   };
 
   return (
@@ -54,7 +54,7 @@ const Header = ({ history }) => {
                       <NavDropdown.Item>Users List</NavDropdown.Item>
                     </LinkContainer>
                   )}
-                  <NavDropdown.Item onClick={logoutHandler}>
+                   <NavDropdown.Item onClick={()=>logoutHandler()}>
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
