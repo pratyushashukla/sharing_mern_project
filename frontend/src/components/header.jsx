@@ -36,12 +36,12 @@ const Header = () => {
                   <LinkContainer to="/attendance">
                     <NavDropdown.Item>Take Attendance</NavDropdown.Item>
                   </LinkContainer>
+                  <LinkContainer to="/analysis">
+                    <NavDropdown.Item>View Attendance Report</NavDropdown.Item>
+                  </LinkContainer>
                   {/* <LinkContainer to="/addStudent"> */}
                     <NavDropdown.Item>Add Student</NavDropdown.Item>
-                  {/* </LinkContainer> */}
-                  {/* <LinkContainer to="/analysis"> */}
-                    <NavDropdown.Item>View Attendance Report</NavDropdown.Item>
-                  {/* </LinkContainer> */}
+                  {/* </LinkContainer> */}                  
                 </NavDropdown>
               )}
               {userInfo ? (

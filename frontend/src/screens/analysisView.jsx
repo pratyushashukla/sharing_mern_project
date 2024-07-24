@@ -62,7 +62,9 @@ const AnalysisView = () => {
           Go Back
         </Link>
         <div style={{ height: "40px", display: "flex" }}>
-          <Button variant="outline-danger" size="sm" onClick={showModal}>
+          <Button variant="outline-danger" size="sm" 
+          // onClick={showModal}
+          >
             Delete Attendance
           </Button>
         </div>
