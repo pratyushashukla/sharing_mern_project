@@ -70,9 +70,8 @@ const AttendanceTableComponent = ({
                             setAttendanceMap(tempMap);
                           }}
                         >
-                          <option>Hostel</option>
-                          <option>Home</option>
-                          <option>outside</option>
+                          <option>Present</option>
+                          <option>Absent</option>
                         </Form.Control>
                       </Form.Group>
                     </Form>
@@ -81,10 +80,10 @@ const AttendanceTableComponent = ({
                     <span
                       style={{
                         color:
-                          student.status === "Outside"
+                          student.status === "Present"
+                            ? "green"
+                            : student.status === "Absent"
                             ? "red"
-                            : student.status === "Home"
-                            ? "blue"
                             : "black",
                       }}
                     >

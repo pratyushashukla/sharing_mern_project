@@ -15,28 +15,35 @@ const Header = ({ history }) => {
     dispatch(logout());
     history.push("/login");
   };
+
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>React Project</Navbar.Brand>
+            <Navbar.Brand>Hostel Management System</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Route render={({ history }) => <SearchBox history={history} />} />
+            {userInfo && (
+              <Route
+                render={({ history }) => <SearchBox history={history} />}
+              />
+            )}
             <Nav className="ml-auto">
-              <NavDropdown title="More">
-                <LinkContainer to="/attendance">
-                  <NavDropdown.Item>Attendance</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/addStudent">
-                  <NavDropdown.Item>Add Student</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/analysis">
-                  <NavDropdown.Item>View Analysis</NavDropdown.Item>
-                </LinkContainer>
-              </NavDropdown>
+              {userInfo && (
+                <NavDropdown title="More" id="more">
+                  <LinkContainer to="/attendance">
+                    <NavDropdown.Item>Take Attendance</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/addStudent">
+                    <NavDropdown.Item>Add Student</NavDropdown.Item>
+                  </LinkContainer>
+                  {/* <LinkContainer to="/analysis"> */}
+                    <NavDropdown.Item>View Attendance Report</NavDropdown.Item>
+                  {/* </LinkContainer> */}
+                </NavDropdown>
+              )}
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">

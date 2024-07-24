@@ -123,22 +123,24 @@ const StudentDetailsView = ({ match, history }) => {
                       <Row>
                         <Col>Status:</Col>
                         <Col>
-                          <Form.Control
-                            size="sm"
-                            as="select"
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
-                          >
-                            {["Hostel", "Outside", "Home"].map((x) => (
-                              <option key={x} value={x}>
-                                {x}
-                              </option>
-                            ))}
-                          </Form.Control>
+                          {
+                            <Form.Control
+                              size="sm"
+                              as="select"
+                              value={status}
+                              onChange={(e) => setStatus(e.target.value)}
+                            >
+                              {["Present", "Absent"].map((x) => (
+                                <option key={x} value={x}>
+                                  {x}
+                                </option>
+                              ))}
+                            </Form.Control>
+                          }
                         </Col>
                       </Row>
                     </ListGroup.Item>
-                    <ListGroup.Item>
+                    {/* <ListGroup.Item>
                       <Button
                         className="btn-block"
                         type="button"
@@ -146,7 +148,7 @@ const StudentDetailsView = ({ match, history }) => {
                       >
                         Update
                       </Button>
-                    </ListGroup.Item>
+                    </ListGroup.Item> */}
                   </ListGroup>
                 </Card>
               </Col>
@@ -154,12 +156,17 @@ const StudentDetailsView = ({ match, history }) => {
                 <ListGroup variant="flush">
                   <Row>
                     <ListGroup.Item variant="secondary">
-                      <Button onClick={navigateToEdit}>
+                      <Button
+                      // onClick={navigateToEdit}
+                      >
                         <i className="fas fa-edit"></i>
                       </Button>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <Button variant="danger" onClick={deleteStuden}>
+                      <Button
+                        variant="danger"
+                        // onClick={deleteStuden}
+                      >
                         <i className="fas fa-trash"></i>
                       </Button>
                     </ListGroup.Item>

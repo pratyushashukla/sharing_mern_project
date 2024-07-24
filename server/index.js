@@ -8,8 +8,10 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import connectDB from "./config/mongoDBConfig.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
+
 dotenv.config();
 connectDB();
+
 const app = express();
 
 if (process.env.NODE_ENV === "development") {

@@ -25,3 +25,9 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+=======
+
+# Package-lock file
+package-lock.json
+>>>>>>> be43506 (room no changed to dropdown)
