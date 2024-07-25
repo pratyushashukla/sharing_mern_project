@@ -124,7 +124,7 @@ const StudentDetailsView = ({ match, history }) => {
                         <Col>Status:</Col>
                         <Col>
                           {
-                            <ListGroup
+                            <Form.Control
                               size="sm"
                               as="select"
                               value={status}
@@ -135,7 +135,7 @@ const StudentDetailsView = ({ match, history }) => {
                                   {x}
                                 </option>
                               ))}
-                            </ListGroup>
+                            </Form.Control>
                           }
                         </Col>
                       </Row>

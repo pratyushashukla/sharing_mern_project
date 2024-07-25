@@ -10,6 +10,7 @@ import { login } from "../../actions/userActions";
 const LoginView = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [stayLoggedIn, setStayLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -20,9 +21,19 @@ const LoginView = ({ location, history }) => {
 
   useEffect(() => {
     if (userInfo) {
+      if (stayLoggedIn) {
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      }
       history.push(redirect);
     }
-  }, [history, userInfo, redirect]);
+  }, [history, userInfo, redirect, stayLoggedIn]);
+
+  useEffect(() => {
+    const savedUserInfo = localStorage.getItem('userInfo');
+    if (savedUserInfo) {
+      dispatch({ type: 'USER_LOGIN_SUCCESS', payload: JSON.parse(savedUserInfo) });
+    }
+  }, [dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -53,6 +64,14 @@ const LoginView = ({ location, history }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
+        </Form.Group>
+        <Form.Group controlId="stayLoggedIn">
+          <Form.Check 
+            type="checkbox"
+            label="Stay logged in"
+            checked={stayLoggedIn}
+            onChange={(e) => setStayLoggedIn(e.target.checked)}
+          ></Form.Check>
         </Form.Group>
         <Button type='submit' variant='primary'>
           Sign In

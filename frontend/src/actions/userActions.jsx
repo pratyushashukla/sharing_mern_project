@@ -26,7 +26,11 @@ import {
   USER_UPDATE_REQUEST,
 } from "../constants/userConstants";
 
+<<<<<<< HEAD
 export const login = (email, password) => async (dispatch) => {
+=======
+export const login = (email, password, stayLoggedIn) => async (dispatch) => {
+>>>>>>> dev
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
@@ -49,7 +53,14 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     });
 
+<<<<<<< HEAD
     localStorage.setItem("userInfo", JSON.stringify(data));
+=======
+    //localStorage.setItem("userInfo", JSON.stringify(data));
+    if (stayLoggedIn) {
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    }
+>>>>>>> dev
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -62,11 +73,18 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
+<<<<<<< HEAD
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: USER_LIST_RESET });
   document.location.href = "/login";
+=======
+  localStorage.clear();
+  dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: USER_LIST_RESET });
+>>>>>>> dev
 };
 
 export const register = (name, email, password) => async (dispatch) => {

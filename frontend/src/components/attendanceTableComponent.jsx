@@ -3,6 +3,7 @@ import { Table, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { postAttendance } from "../actions/attendanceActions";
 import { Link } from "react-router-dom";
+
 const AttendanceTableComponent = ({
   students,
   attendanceMap,
@@ -11,7 +12,9 @@ const AttendanceTableComponent = ({
   roomNo,
 }) => {
   const dispatch = useDispatch();
+
   useEffect(() => {}, [dispatch, attendanceMap]);
+
   const updateAttendance = () => {
     if (attendance) {
       if (!attendance.roomNo.includes(roomNo)) {
@@ -21,6 +24,7 @@ const AttendanceTableComponent = ({
     const roomData = attendance ? attendance.roomNo : roomNo;
     const dataData = attendanceMap;
     const detailsData = attendance ? attendance.details : {};
+
     students.map((student) => {
       detailsData[student._id] = {
         name: student.name,
@@ -37,6 +41,7 @@ const AttendanceTableComponent = ({
       })
     );
   };
+
   return (
     <>
       <Table striped bordered hover responsive className="table-sm">
@@ -44,7 +49,7 @@ const AttendanceTableComponent = ({
           <tr>
             <th>NAME</th>
             <th>Attendance</th>
-            <th>STATUS</th>
+            {/* <th>STATUS</th> */}
             <th>CONTACT</th>
             <th>CITY</th>
           </tr>
@@ -76,7 +81,7 @@ const AttendanceTableComponent = ({
                       </Form.Group>
                     </Form>
                   </td>
-                  <td>
+                  {/* <td>
                     <span
                       style={{
                         color:
@@ -89,7 +94,7 @@ const AttendanceTableComponent = ({
                     >
                       {student.status}
                     </span>
-                  </td>
+                  </td> */}
                   <td>
                     <a href={`tel:${student.contact}`}>{student.contact}</a>
                   </td>
