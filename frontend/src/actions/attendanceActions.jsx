@@ -10,10 +10,7 @@ import {
   ATTENDANCE_DELETE_FAIL,
 } from "../constants/attendanceConstant";
 import axios from "axios";
-<<<<<<< HEAD
-=======
 import { getStudentsByRoomNo } from "./studentActions";
->>>>>>> dev
 
 export const postAttendance = (attendance) => async (dispatch, getState) => {
   try {
@@ -32,12 +29,9 @@ export const postAttendance = (attendance) => async (dispatch, getState) => {
       type: ATTENDANCE_DATA_ENTER_SUCCESS,
       payload: data,
     });
-<<<<<<< HEAD
-=======
 
     dispatch(getStudentsByRoomNo(attendance.roomNo))
 
->>>>>>> dev
   } catch (error) {
     dispatch({
       type: ATTENDANCE_DATA_ENTER_FAIL,

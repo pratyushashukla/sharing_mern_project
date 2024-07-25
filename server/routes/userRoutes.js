@@ -24,8 +24,6 @@ router
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);
 
-<<<<<<< HEAD
-=======
 router.post("/login", async (req, res) => {
   const { email, password, stayLoggedIn } = req.body;
 
@@ -46,5 +44,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
->>>>>>> dev
 export default router;
