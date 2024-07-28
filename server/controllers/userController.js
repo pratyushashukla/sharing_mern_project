@@ -5,7 +5,7 @@ import User from "../models/user.js";
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: email }).exec();
 
   if (user && (await user.matchPassword(password))) {
     res.json({
@@ -24,7 +24,7 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  const userExists = await User.findOne({ email });
+  const userExists = await User.findOne({ email: email }).exec();
 
   if (userExists) {
     res.status(400);

@@ -5,20 +5,15 @@ import Loading from "../components/loader.jsx";
 import Message from "../components/message.jsx";
 import { listStudents } from "../actions/studentActions";
 import Paginate from "../components/paginate";
-import {
-  Row,
-  Col,
-  ButtonGroup,
-  ToggleButton,
-  Container,
-} from "react-bootstrap";
+import { Row, Col, Container, ButtonGroup, ToggleButton } from "react-bootstrap";
 import StudentsTableView from "./studentTableView";
+import "./HomeView.css"; // Import custom CSS
 
 const HomeView = ({ match, history }) => {
   const [isGrid, setIsGrid] = useState(true);
   const keyword = match.params.keyword;
-
   const pageNumber = match.params.pageNumber || 1;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { loading: userLoading, userInfo } = userLogin;
 
@@ -32,38 +27,29 @@ const HomeView = ({ match, history }) => {
       history.push("/login");
     }
     dispatch(listStudents(keyword, pageNumber));
-  }, [keyword, pageNumber]);
+  }, [dispatch, keyword, pageNumber, history, userInfo, userLoading]);
 
   return (
-    <>
-      <>
-        <Container>
-          <Row className="justify-content-md-center">
-            <Col xs lg="2"></Col>
-            <Col md="auto">
-              <ButtonGroup toggle>
-                {["Grid", "Table"].map((type) => (
-                  <ToggleButton
-                    key={type}
-                    type="radio"
-                    variant="secondary"
-                    name="radio"
-                    value={type}
-                    checked={(isGrid ? "Grid" : "Table") === type}
-                    onChange={(e) =>
-                      setIsGrid(e.target.value === "Grid" ? true : false)
-                    }
-                  >
-                    {type === "Grid" ? <> Grid</> : <> Table </>}
-                  </ToggleButton>
-                ))}
-              </ButtonGroup>
-            </Col>
-            <Col xs lg="2"></Col>
-          </Row>
-        </Container>
-      </>
-
+    <Container className="home-container">
+      {/* <Row className="justify-content-md-center my-3">
+        <Col md="auto">
+          <ButtonGroup toggle>
+            {["Grid", "Table"].map((type) => (
+              <ToggleButton
+                key={type}
+                type="radio"
+                variant="secondary"
+                name="radio"
+                value={type}
+                checked={(isGrid ? "Grid" : "Table") === type}
+                onChange={(e) => setIsGrid(e.target.value === "Grid")}
+              >
+                {type}
+              </ToggleButton>
+            ))}
+          </ButtonGroup>
+        </Col>
+      </Row> */}
       <h1>Students</h1>
       {loading ? (
         <Loading />
@@ -73,23 +59,19 @@ const HomeView = ({ match, history }) => {
         <>
           <Row>
             {students.map((student) => (
-              <Col key={student._id} sm={12} md={6} lg={4} xl={3}>
-                <Student stuentDetails={student} />
+              <Col key={student._id} sm={12} md={6} lg={4} xl={3} className="mb-3">
+                <div className="student-card">
+                  <Student student={student} />
+                </div>
               </Col>
             ))}
           </Row>
-          <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ""}
-          />
+          <Paginate pages={pages} page={page} keyword={keyword ? keyword : ""} />
         </>
       ) : (
-        <>
-          <StudentsTableView keyword={keyword} pageNumber={pageNumber} />
-        </>
+        <StudentsTableView keyword={keyword} pageNumber={pageNumber} />
       )}
-    </>
+    </Container>
   );
 };
 

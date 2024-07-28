@@ -11,10 +11,8 @@ const AttendanceTable = ({ roomNo }) => {
   const getStudentsByRoomNo = useSelector((state) => state.getStudentsByRoomNo);
   const { loading, error, students, attendance } = getStudentsByRoomNo;
   const attendanceDataEnter = useSelector((state) => state.attendanceDataEnter);
-  const {
-    loading: loadingAttendance,
-    error: errorAttendance,
-  } = attendanceDataEnter;
+  const { loading: loadingAttendance, error: errorAttendance } = attendanceDataEnter;
+
   useEffect(() => {
     if (students) {
       arrangeTable();
@@ -28,14 +26,14 @@ const AttendanceTable = ({ roomNo }) => {
         if (attendance.data[student._id]) {
           tempMap[student._id] = attendance.data[student._id];
         } else {
-          tempMap[student._id] = "Hostel";
+          tempMap[student._id] = "Present";
         }
       });
       setAttendanceMap(attendanceMap);
     } else {
       students.map((student) => {
         var temp = attendanceMap;
-        temp[student._id] = "Hostel";
+        temp[student._id] = "Present";
         setAttendanceMap(temp);
       });
     }
@@ -50,9 +48,7 @@ const AttendanceTable = ({ roomNo }) => {
         <Loading />
       ) : (
         <>
-          {errorAttendance && (
-            <Message variant="danger">{errorAttendance}</Message>
-          )}
+          {errorAttendance && <Message variant="danger">{errorAttendance}</Message>}
           {students && (
             <>
               <AttendanceTableComponent

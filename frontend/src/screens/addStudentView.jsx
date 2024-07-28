@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Row, Col, Container, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import FormContainer from "../components/formContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { addStudent, updateStudent } from "../actions/studentActions";
 import Loading from "../components/loader.jsx";
@@ -21,17 +20,13 @@ const AddStudentView = () => {
   const [image, setImage] = useState("");
   const [roomNo, setRoomNo] = useState("");
   const [blockNo, setBlockNo] = useState("");
-  const [status, setStatus] = useState("Hostel");
+  const [status, setStatus] = useState("Absent");
 
   const dispatch = useDispatch();
   const studentAdd = useSelector((state) => state.studentAdd);
   const { loading, error, success } = studentAdd;
   const studentUpdate = useSelector((state) => state.studentUpdate);
-  const {
-    loading: loadingUpdate,
-    error: errorUpdate,
-    success: successUpdate,
-  } = studentUpdate;
+  const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = studentUpdate;
 
   useEffect(() => {
     if (successUpdate) {
@@ -58,7 +53,7 @@ const AddStudentView = () => {
   }, [dispatch, history, success, successUpdate]);
 
   const submitHandler = () => {
-    if (isEdit === true) {
+    if (isEdit) {
       const _id = history.location.state.studentProps._id;
       dispatch(
         updateStudent({
@@ -94,123 +89,139 @@ const AddStudentView = () => {
   };
 
   return (
-    <>
+    <Container>
       <Link to="/" className="btn btn-light my-3">
         Go Back
       </Link>
-
       {loading || loadingUpdate ? (
         <Loader />
       ) : (
         <>
           {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
-          <FormContainer>
+          <Card className="p-4 shadow-sm">
             <h1>{isEdit ? "Edit Student" : "Add Student"}</h1>
             {loading && <Loading />}
             {error && <Message variant="danger">{error}</Message>}
-            <Form onSubmit={submitHandler}></Form>
-            <Form.Group controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="status">
-              <Form.Label>Status</Form.Label>
-              <Form.Control
-                as="select"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                {["Hostel", "Outside", "Home"].map((x) => (
-                  <option key={x + 1} value={x + 1}>
-                    {x}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="address">
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="city">
-              <Form.Label>City</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter city"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="contact">
-              <Form.Label>Contact</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter phone number"
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="fatherContact">
-              <Form.Label>Father Contact</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter Father Phone Number"
-                value={fatherContact}
-                onChange={(e) => setFatherContact(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="roomNo">
-              <Form.Label>Room No</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Room no"
-                value={roomNo}
-                onChange={(e) => setRoomNo(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="b">
-              <Form.Label>Block Number</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Block Number"
-                value={blockNo}
-                onChange={(e) => setBlockNo(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="image">
-              <Form.Label>Image Url</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Image Url"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="category">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Stream"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Button type="submit" variant="primary" onClick={submitHandler}>
-              {isEdit ? "Update" : "Add Student"}
-            </Button>
-          </FormContainer>
+            <Form onSubmit={submitHandler}>
+              <Row>
+                <Col md={6}>
+                  <Form.Group controlId="name" className="mb-3">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group controlId="status" className="mb-3">
+                    <Form.Label>Status</Form.Label>
+                    <Form.Control as="select" value={status} onChange={(e) => setStatus(e.target.value)}>
+                      {["Present", "Absent"].map((x) => (
+                        <option key={x} value={x}>
+                          {x}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <Form.Group controlId="address" className="mb-3">
+                    <Form.Label>Address</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group controlId="city" className="mb-3">
+                    <Form.Label>City</Form.Label>
+                    <Form.Control type="text" placeholder="Enter city" value={city} onChange={(e) => setCity(e.target.value)} />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <Form.Group controlId="contact" className="mb-3">
+                    <Form.Label>Contact</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter phone number"
+                      value={contact}
+                      onChange={(e) => setContact(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group controlId="fatherContact" className="mb-3">
+                    <Form.Label>Father Contact</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter father phone number"
+                      value={fatherContact}
+                      onChange={(e) => setFatherContact(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <Form.Group controlId="roomNo" className="mb-3">
+                    <Form.Label>Room No</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter room no"
+                      value={roomNo}
+                      onChange={(e) => setRoomNo(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group controlId="blockNo" className="mb-3">
+                    <Form.Label>Block Number</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter block number"
+                      value={blockNo}
+                      onChange={(e) => setBlockNo(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <Form.Group controlId="image" className="mb-3">
+                    <Form.Label>Image URL</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter image URL"
+                      value={image}
+                      onChange={(e) => setImage(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group controlId="category" className="mb-3">
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter stream"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Button type="submit" variant="primary" className="w-100 mt-3">
+                {isEdit ? "Update" : "Add Student"}
+              </Button>
+            </Form>
+          </Card>
         </>
       )}
-    </>
+    </Container>
   );
 };
 

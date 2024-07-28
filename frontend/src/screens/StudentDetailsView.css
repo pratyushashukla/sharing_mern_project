@@ -1,0 +1,29 @@
+/* StudentDetailsView.css */
+
+.container {
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #f8f9fa;
+}
+
+.btn-light {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-block {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}

@@ -1,0 +1,58 @@
+/* LoginView.css */
+.login-container {
+    background-color: #f8f9fa;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .login-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #343a40;
+  }
+  
+  .login-input {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+  }
+  
+  .login-checkbox {
+    font-size: 0.9rem;
+    color: #495057;
+  }
+  
+  .login-button {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .register-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .register-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
