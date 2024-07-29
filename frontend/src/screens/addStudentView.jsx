@@ -171,11 +171,16 @@ const AddStudentView = () => {
             <Form.Group controlId="roomNo">
               <Form.Label>Room No</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter Room no"
-                value={roomNo}
-                onChange={(e) => setRoomNo(e.target.value)}
-              ></Form.Control>
+                  as="select"
+                  value={roomNo}
+                  onChange={(e) => setRoomNo(e.target.value)}
+                >
+                  {["01", "02", "03", "04", "05"].map((x) => (
+                    <option key={x} value={x}>
+                      {x}
+                    </option>
+                  ))}
+                </Form.Control>
             </Form.Group>
             <Form.Group controlId="b">
               <Form.Label>Block Number</Form.Label>

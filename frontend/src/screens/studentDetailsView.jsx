@@ -111,7 +111,9 @@ const StudentDetailsView = ({ match, history }) => {
                     <ListGroup.Item>
                       <Row>
                         <Col>Room No:</Col>
-                        <Col> {student.roomNo}</Col>
+                        <Col>
+                        {student.roomNo}
+                        </Col>
                       </Row>
                     </ListGroup.Item>
                     <ListGroup.Item>
@@ -141,7 +143,7 @@ const StudentDetailsView = ({ match, history }) => {
                         </Col>
                       </Row>
                     </ListGroup.Item>
-                    {/* <ListGroup.Item>
+                    {/*<ListGroup.Item>
                       <Button
                         className="btn-block"
                         type="button"
@@ -149,7 +151,7 @@ const StudentDetailsView = ({ match, history }) => {
                       >
                         Update
                       </Button>
-                    </ListGroup.Item> */}
+                    </ListGroup.Item>*/}
                   </ListGroup>
                 </Card>
               </Col>
@@ -158,7 +160,7 @@ const StudentDetailsView = ({ match, history }) => {
                   <Row>
                     <ListGroup.Item variant="secondary">
                       <Button
-                      // onClick={navigateToEdit}
+                      onClick={navigateToEdit}
                       >
                         <i className="fas fa-edit"></i>
                       </Button>
@@ -166,7 +168,7 @@ const StudentDetailsView = ({ match, history }) => {
                     <ListGroup.Item>
                       <Button
                         variant="danger"
-                        // onClick={deleteStuden}
+                        onClick={deleteStuden}
                       >
                         <i className="fas fa-trash"></i>
                       </Button>

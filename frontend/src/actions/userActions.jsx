@@ -24,6 +24,7 @@ import {
   USER_UPDATE_FAIL,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
+  SERVER_URL,
 } from "../constants/userConstants";
 
 
@@ -39,7 +40,7 @@ export const login = (email, password, stayLoggedIn) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post("/users/login", { email, password }, config);
+    const { data } = await axios.post(SERVER_URL+"/users/login", { email, password }, config);
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
