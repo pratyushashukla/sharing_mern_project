@@ -2,11 +2,8 @@ import React from "react";
 import { Card, Col, Row, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Student = ({ studentDetails: student }) => {
-  if (!student) {
-    return null; 
-  }
-
+const Student = ({ student }) => {
+  console.log("student",student)
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/student/${student._id}`}>

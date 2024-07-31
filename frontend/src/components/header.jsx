@@ -17,7 +17,7 @@ const Header = () => {
   const logoutHandler = () => {
     console.log(history);
     dispatch(logout());
-    history.push("/login");
+    window.location.href = "/login";
   };
 
   return (
@@ -29,22 +29,18 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            {userInfo && (
-              <Route
-                render={({ history }) => <SearchBox history={history} />}
-              />
-            )}
+            {userInfo && <Route render={({ history }) => <SearchBox history={history} />} />}
             <Nav className="ml-auto">
               {userInfo && (
                 <NavDropdown title="More" id="more">
                   <LinkContainer to="/attendance">
                     <NavDropdown.Item>Take Attendance</NavDropdown.Item>
                   </LinkContainer>
+                  <LinkContainer to="/analysis">
+                    <NavDropdown.Item>View Attendance Report</NavDropdown.Item>
+                  </LinkContainer>
                   <LinkContainer to="/addStudent">
                     <NavDropdown.Item>Add Student</NavDropdown.Item>
-                  </LinkContainer>
-                   <LinkContainer to="/analysis">
-                    <NavDropdown.Item>View Attendance Report</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}
@@ -58,9 +54,7 @@ const Header = () => {
                       <NavDropdown.Item>Users List</NavDropdown.Item>
                     </LinkContainer>
                   )}
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => logoutHandler()}>Logout</NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">

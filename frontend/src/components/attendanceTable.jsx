@@ -11,8 +11,8 @@ const AttendanceTable = ({ roomNo }) => {
   const getStudentsByRoomNo = useSelector((state) => state.getStudentsByRoomNo);
   const { loading, error, students, attendance } = getStudentsByRoomNo;
   const attendanceDataEnter = useSelector((state) => state.attendanceDataEnter);
-  const { loading: loadingAttendance, error: errorAttendance } =
-    attendanceDataEnter;
+  const { loading: loadingAttendance, error: errorAttendance } = attendanceDataEnter;
+
   useEffect(() => {
     if (students) {
       arrangeTable();
@@ -48,9 +48,7 @@ const AttendanceTable = ({ roomNo }) => {
         <Loading />
       ) : (
         <>
-          {errorAttendance && (
-            <Message variant="danger">{errorAttendance}</Message>
-          )}
+          {errorAttendance && <Message variant="danger">{errorAttendance}</Message>}
           {students && (
             <>
               <AttendanceTableComponent

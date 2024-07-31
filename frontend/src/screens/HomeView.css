@@ -1,0 +1,36 @@
+/* HomeView.css */
+.home-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .student-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .student-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .student-card img {
+    border-radius: 10px;
+  }
+  
+  .student-card h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: #343a40;
+  }
+  
+  .student-card p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #6c757d;
+  }
+  
