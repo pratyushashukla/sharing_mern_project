@@ -26,7 +26,7 @@ const addStudent = asyncHandler(async (req, res) => {
 
   if (studentsInRoom >= 4) {
     res.status(400);
-    throw new Error(`Room ${roomNo} is already at full capacity.`);
+    throw new Error(`Room ${roomNo}, is already at full capacity.`);
   }
   const student = await Student.create({
     name,

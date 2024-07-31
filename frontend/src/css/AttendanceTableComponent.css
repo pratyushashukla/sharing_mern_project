@@ -1,0 +1,31 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .table-sm {
+    background-color: #f8f9fa;
+  }
+  
+  .thead-dark th {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .btn-success {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .form-control {
+    max-width: 100%;
+    margin: auto;
+  }
+  
+  .table-responsive {
+    margin-bottom: 20px;
+  }
+  

@@ -1,0 +1,27 @@
+/* SearchBox.css */
+.search-box-form {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 500px;
+  }
+  
+  .search-box-input {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: none;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+  }
+  
+  .search-box-button {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+  }
+  
+  .search-box-button i {
+    color: #ffffff;
+  }
+  

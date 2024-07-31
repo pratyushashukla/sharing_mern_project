@@ -30,8 +30,6 @@ export const postAttendance = (attendance) => async (dispatch, getState) => {
       payload: data,
     });
 
-    dispatch(getStudentsByRoomNo(attendance.roomNo))
-
   } catch (error) {
     dispatch({
       type: ATTENDANCE_DATA_ENTER_FAIL,
