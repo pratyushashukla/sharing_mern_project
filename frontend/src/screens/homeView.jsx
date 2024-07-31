@@ -7,7 +7,7 @@ import { listStudents } from "../actions/studentActions";
 import Paginate from "../components/paginate";
 import { Row, Col, Container, ButtonGroup, ToggleButton } from "react-bootstrap";
 import StudentsTableView from "./studentTableView";
-import "./HomeView.css"; // Import custom CSS
+import "../css//HomeView.css";
 
 const HomeView = ({ match, history }) => {
   const [isGrid, setIsGrid] = useState(true);

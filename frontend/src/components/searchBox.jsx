@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, InputGroup } from 'react-bootstrap';
-import './SearchBox.css'; // Import custom CSS
+import "../css/SearchBox.css"
 
 const SearchBox = ({ history }) => {
   const [keyword, setKeyword] = useState('');

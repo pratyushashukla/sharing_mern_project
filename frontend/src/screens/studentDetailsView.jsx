@@ -6,7 +6,7 @@ import Loading from "../components/loader";
 import Message from "../components/message";
 import { getStudentDetails, updateStudent, deleteStudent } from "../actions/studentActions";
 import { STUDENT_UPDATE_RESET } from "../constants/studentConstant";
-import './StudentDetailsView.css'; // Import custom CSS
+import '../css//StudentDetailsView.css'; // Import custom CSS
 
 const StudentDetailsView = ({ match, history }) => {
   const [status, setStatus] = useState("");

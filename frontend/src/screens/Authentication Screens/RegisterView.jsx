@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/message";
 import Loader from "../../components/loader";
 import { register } from "../../actions/userActions";
-import "./RegisterView.css"; // Import custom CSS
+import "../../css/RegisterView.css";
 
 const RegisterView = ({ location, history }) => {
   const [name, setName] = useState("");

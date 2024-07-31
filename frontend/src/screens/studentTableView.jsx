@@ -47,9 +47,9 @@ const StudentsTableView = ({ keyword, pageNumber }) => {
                     <span
                       style={{
                         color:
-                          student.status === "Outside"
+                          student.status === "Absent"
                             ? "red"
-                            : student.status === "Home"
+                            : student.status === "Present"
                             ? "blue"
                             : "black",
                       }}

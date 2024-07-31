@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/message";
 import Loader from "../../components/loader";
 import { login } from "../../actions/userActions";
-import "./LoginView.css";
+import "../../css/LoginView.css";
 
 const LoginView = ({ location, history }) => {
   const [email, setEmail] = useState("");

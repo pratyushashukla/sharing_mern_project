@@ -22,7 +22,12 @@ const addStudent = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Student already exists");
   }
+  const studentsInRoom = await Student.countDocuments({ roomNo: roomNo });
 
+  if (studentsInRoom >= 4) {
+    res.status(400);
+    throw new Error(`Room ${roomNo}, is already at full capacity.`);
+  }
   const student = await Student.create({
     name,
     address,
@@ -59,6 +64,15 @@ const updateStudentProfile = asyncHandler(async (req, res) => {
   const student = await Student.findById(req.body._id);
 
   if (student) {
+    // Check if the room number is being changed
+    if (req.body.roomNo && req.body.roomNo !== student.roomNo) {
+      const studentsInRoom = await Student.countDocuments({ roomNo: req.body.roomNo });
+      if (studentsInRoom >= 4) {
+        res.status(400);
+        throw new Error(`Room ${req.body.roomNo} is already at full capacity.`);
+      }
+    }
+
     student.name = req.body.name || student.name;
     student.address = req.body.address || student.address;
     student.category = req.body.category || student.category;
@@ -69,6 +83,7 @@ const updateStudentProfile = asyncHandler(async (req, res) => {
     student.roomNo = req.body.roomNo || student.roomNo;
     student.blockNo = req.body.blockNo || student.blockNo;
     student.status = req.body.status || student.status;
+
     const updatedStudent = await student.save();
 
     res.json({
@@ -89,6 +104,7 @@ const updateStudentProfile = asyncHandler(async (req, res) => {
     throw new Error("Student not found");
   }
 });
+
 const getAllStudents = asyncHandler(async (req, res) => {
   const pageSize = 15;
   const page = Number(req.query.pageNumber) || 1;

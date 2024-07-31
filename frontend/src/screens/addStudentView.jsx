@@ -7,6 +7,7 @@ import Loading from "../components/loader.jsx";
 import Message from "../components/message.jsx";
 import { STUDENT_UPDATE_RESET } from "../constants/studentConstant";
 import Loader from "../components/loader";
+import { clearAddStudentData } from "../reducers/studentsReducer.jsx";
 
 const AddStudentView = () => {
   const history = useHistory();
@@ -27,6 +28,20 @@ const AddStudentView = () => {
   const { loading, error, success } = studentAdd;
   const studentUpdate = useSelector((state) => state.studentUpdate);
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = studentUpdate;
+
+  useEffect(() => {
+    dispatch(clearAddStudentData());
+    setName("");
+    setAddress("");
+    setCategory("");
+    setCity("");
+    setContact("");
+    setFatherContact("");
+    setImage("");
+    setRoomNo("");
+    setBlockNo("");
+    setStatus("");
+  }, []);
 
   useEffect(() => {
     if (successUpdate) {
@@ -171,11 +186,17 @@ const AddStudentView = () => {
                   <Form.Group controlId="roomNo" className="mb-3">
                     <Form.Label>Room No</Form.Label>
                     <Form.Control
-                      type="text"
-                      placeholder="Enter room no"
-                      value={roomNo}
-                      onChange={(e) => setRoomNo(e.target.value)}
-                    />
+                  as="select"
+                  value={roomNo}
+                  onChange={(e) => setRoomNo(e.target.value)}
+                >
+                  <option value="" disabled selected>Select Room No.</option>
+                  {["01", "02", "03", "04", "05"].map((x) => (
+                    <option key={x} value={x}>
+                      {x}
+                    </option>
+                  ))}
+                </Form.Control>
                   </Form.Group>
                 </Col>
                 <Col md={6}>

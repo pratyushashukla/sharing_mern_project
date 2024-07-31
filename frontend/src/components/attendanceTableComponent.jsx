@@ -3,7 +3,7 @@ import { Table, Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { postAttendance } from "../actions/attendanceActions";
 import { Link } from "react-router-dom";
-import './AttendanceTableComponent.css'; // Import custom CSS
+import '../css//AttendanceTableComponent.css'; 
 
 const AttendanceTableComponent = ({ students, attendanceMap, attendance, roomNo }) => {
   const dispatch = useDispatch();
@@ -79,7 +79,7 @@ const AttendanceTableComponent = ({ students, attendanceMap, attendance, roomNo 
                           class
                             as="select"
                             size="sm"
-                            value={localAttendanceMap[student._id] || attendance.data[student._id]}
+                            value={localAttendanceMap[student._id]}
                             onChange={(e) => {
                               var tempMap = { ...localAttendanceMap };
                               tempMap[student._id] = e.target.value;

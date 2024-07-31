@@ -10,7 +10,13 @@ import {
   ATTENDANCE_DELETE_REQUEST,
   ATTENDANCE_DELETE_SUCCESS,
   ATTENDANCE_DELETE_FAIL,
+  CLEAR_ATTENDANCE_DATA
 } from "../constants/attendanceConstant";
+
+export const clearAttendanceData = () => ({
+  type: CLEAR_ATTENDANCE_DATA,
+});
+
 
 export const attendanceDataEnterReducer = (state = {}, action) => {
   switch (action.type) {
@@ -25,6 +31,12 @@ export const attendanceDataEnterReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case ATTENDANCE_DATA_ENTER_RESET:
       return {};
+    
+      case CLEAR_ATTENDANCE_DATA:
+        return { ...state, 
+          attendance:[], 
+          getStudentsByRoomNo: "",
+        };
 
     default:
       return state;

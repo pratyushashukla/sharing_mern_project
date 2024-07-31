@@ -164,7 +164,7 @@ export const getStudentsByRoomNo = (roomNo) => async (dispatch, getState) => {
     dispatch({ type: STUDENT_ROOM_NO_REQUEST });
     const {
       userLogin: { userInfo },
-    } = getState();
+    } = getState("");
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
