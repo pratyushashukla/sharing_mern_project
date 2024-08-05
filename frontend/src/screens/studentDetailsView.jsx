@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image, ListGroup, Card, Button, Form, Container } from "react-bootstrap";
 import Loading from "../components/loader";
 import Message from "../components/message";
-import { getStudentDetails, updateStudent, deleteStudent } from "../actions/studentActions";
+import { getStudentDetails, updateStudent, deleteStudent as deleteStudentAction } from "../actions/studentActions";
 import { STUDENT_UPDATE_RESET } from "../constants/studentConstant";
-import '../css//StudentDetailsView.css'; // Import custom CSS
+import '../css/StudentDetailsView.css'; // Import custom CSS
 
 const StudentDetailsView = ({ match, history }) => {
   const [status, setStatus] = useState("");
@@ -45,9 +45,9 @@ const StudentDetailsView = ({ match, history }) => {
     dispatch(updateStudent(student));
   };
 
-  const deleteStudent = () => {
+  const handleDelete = () => {
     if (window.confirm("Are you sure")) {
-      dispatch(deleteStudent(student._id));
+      dispatch(deleteStudentAction(student._id));
     }
   };
 
@@ -135,7 +135,7 @@ const StudentDetailsView = ({ match, history }) => {
               <Button variant="primary" className="mr-2" onClick={navigateToEdit}>
                 <i className="fas fa-edit"></i> Edit
               </Button>
-              <Button variant="danger" onClick={deleteStudent}>
+              <Button variant="danger" onClick={handleDelete}>
                 <i className="fas fa-trash"></i> Delete
               </Button>
             </Col>
