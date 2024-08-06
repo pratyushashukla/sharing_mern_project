@@ -111,7 +111,7 @@ const StudentDetailsView = ({ match, history }) => {
                           <Col>{student.blockNo}</Col>
                         </Row>
                       </ListGroup.Item>
-                      <ListGroup.Item>
+                      {/* <ListGroup.Item>
                         <Row>
                           <Col>Status:</Col>
                           <Col>
@@ -129,7 +129,7 @@ const StudentDetailsView = ({ match, history }) => {
                         <Button className="btn-block" type="button" onClick={updateStatus}>
                           Update
                         </Button>
-                      </ListGroup.Item>
+                      </ListGroup.Item> */}
                     </ListGroup>
                   </Card.Body>
                 </Card>
