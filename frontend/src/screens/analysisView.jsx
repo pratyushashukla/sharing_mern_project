@@ -20,17 +20,18 @@ const AnalysisView = () => {
   const attendanceDelete = useSelector((state) => state.attendanceDelete);
   const { loading: loadingDelete, success: successDelete, error: errorDelete } = attendanceDelete;
 
+
   useEffect(() => {
-    if (attendance) {
-      const temp = [];
-      Object.entries(attendance.details).forEach((at) => {
-        temp.push(at[0]);
-      });
-      setIdList(temp);
-    } else {
+    // if (attendance) {
+    //   const temp = [];
+    //   Object.entries(attendance.details).forEach((at) => {
+    //     temp.push(at[0]);
+    //   });
+    //   setIdList(temp);
+    // } else {
       dispatch(getAnalysisByDate(startDate.toString().substring(0, 15)));
-    }
-  }, [attendance, dispatch]);
+    // }
+  }, []);
 
   const changeDate = (date) => {
     dispatch(getAnalysisByDate(date.toString().substring(0, 15)));
@@ -72,7 +73,9 @@ const AnalysisView = () => {
 
       <Row className="my-3">
         <Col md={8}>
-          <h5>Attendance Report For <strong>{startDate.toLocaleDateString("en-GB", options)}</strong></h5>
+          <h5>
+            Attendance Report For <strong>{startDate.toLocaleDateString("en-GB", options)}</strong>
+          </h5>
         </Col>
         <Col md={4}>
           <DatePicker selected={startDate} onChange={(date) => changeDate(date)} className="form-control" />
@@ -87,12 +90,7 @@ const AnalysisView = () => {
           <Form>
             <Form.Group controlId="days">
               <Form.Label>Enter number of days</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter days"
-                value={days}
-                onChange={(e) => setDays(e.target.value)}
-              />
+              <Form.Control type="number" placeholder="Enter days" value={days} onChange={(e) => setDays(e.target.value)} />
             </Form.Group>
           </Form>
         </Modal.Body>
