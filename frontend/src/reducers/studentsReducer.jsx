@@ -20,7 +20,12 @@ import {
   STUDENT_ROOM_NO_SUCCESS,
   STUDENT_ROOM_NO_ERROR,
   STUDENT_ROOM_NO_RESET,
+  ADD_STUDENT_RESET
 } from "../constants/studentConstant";
+
+export const clearAddStudentData = () => ({
+  type: ADD_STUDENT_RESET,
+});
 
 export const studentListReducer = (state = { students: [] }, action) => {
   switch (action.type) {
@@ -49,6 +54,8 @@ export const studentAddReducer = (state = { students: {} }, action) => {
       return { loading: false, success: true };
     case STUDENT_ADD_ERROR:
       return { loading: false, error: action.payload };
+    case ADD_STUDENT_RESET:
+      return {};
 
     default:
       return state;
@@ -105,6 +112,7 @@ export const getStudentsByRoomNoReducer = (state = {}, action) => {
     case STUDENT_ROOM_NO_REQUEST:
       return { ...state, loading: true };
     case STUDENT_ROOM_NO_SUCCESS:
+      console.log(" action.payload.", action.payload);
       return {
         loading: false,
         students: action.payload.students,

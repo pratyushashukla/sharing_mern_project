@@ -5,10 +5,11 @@ import Message from "./message";
 import AttendanceTableComponent from "./attendanceTableComponent";
 
 const AttendanceTable = ({ roomNo }) => {
-  const dispatch = useDispatch();
+
   const [attendanceMap, setAttendanceMap] = useState({});
 
   const getStudentsByRoomNo = useSelector((state) => state.getStudentsByRoomNo);
+
   const { loading, error, students, attendance } = getStudentsByRoomNo;
   const attendanceDataEnter = useSelector((state) => state.attendanceDataEnter);
   const { loading: loadingAttendance, error: errorAttendance } = attendanceDataEnter;
@@ -17,30 +18,25 @@ const AttendanceTable = ({ roomNo }) => {
     if (students) {
       arrangeTable();
     }
-  }, [dispatch, attendance, attendanceMap, students]);
+  }, [attendance, students]); // Remove unnecessary dependencies
 
-  const arrangeTable = () => {
-    if (attendance) {
-      var tempMap = attendanceMap;
-      students.map((student) => {
-        if (attendance.data[student._id]) {
-          tempMap[student._id] = attendance.data[student._id];
-        } else {
-          tempMap[student._id] = "Present";
-        }
-      });
-      setAttendanceMap(attendanceMap);
-    } else {
-      students.map((student) => {
-        var temp = attendanceMap;
-        temp[student._id] = "Present";
-        setAttendanceMap(temp);
-      });
-    }
-    var temp = attendanceMap;
-    setAttendanceMap(temp);
-  };
-
+const arrangeTable = () => {
+  let tempMap = {};
+  if (attendance) {
+    students.forEach((student) => {
+      if (attendance.data[student._id]) {
+        tempMap[String(student._id)] = attendance.data[student._id];
+      } else {
+        tempMap[String(student._id)] = "Present";
+      }
+    });
+  } else {
+    students.forEach((student) => {
+      tempMap[String(student._id)] = "Present";
+    });
+  }
+  setAttendanceMap(tempMap);
+};
   return (
     <>
       {error && <Message variant="danger">{error}</Message>}
@@ -49,16 +45,13 @@ const AttendanceTable = ({ roomNo }) => {
       ) : (
         <>
           {errorAttendance && <Message variant="danger">{errorAttendance}</Message>}
-          {students && (
-            <>
-              <AttendanceTableComponent
-                students={students}
-                attendanceMap={attendanceMap}
-                setAttendanceMap={setAttendanceMap}
-                attendance={attendance}
-                roomNo={roomNo}
-              />
-            </>
+          {Object.keys(attendanceMap).length > 0 && (
+            <AttendanceTableComponent
+              students={students}
+              attendanceMap={attendanceMap}
+              attendance={attendance}
+              roomNo={roomNo}
+            />
           )}
         </>
       )}

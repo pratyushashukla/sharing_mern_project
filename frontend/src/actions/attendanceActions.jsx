@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { getStudentsByRoomNo } from "./studentActions";
 
-export const postAttendance = (attendance) => async (dispatch, getState) => {
+export const postAttendance = (roomNo, attendance) => async (dispatch, getState) => {
   try {
     dispatch({ type: ATTENDANCE_DATA_ENTER_REQUEST });
     const {
@@ -30,7 +30,7 @@ export const postAttendance = (attendance) => async (dispatch, getState) => {
       payload: data,
     });
 
-    dispatch(getStudentsByRoomNo(attendance.roomNo))
+    dispatch(getStudentsByRoomNo(roomNo))
 
   } catch (error) {
     dispatch({

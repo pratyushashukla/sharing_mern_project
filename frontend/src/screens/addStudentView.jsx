@@ -7,9 +7,11 @@ import Loading from "../components/loader.jsx";
 import Message from "../components/message.jsx";
 import { STUDENT_UPDATE_RESET } from "../constants/studentConstant";
 import Loader from "../components/loader";
+import { clearAddStudentData } from "../reducers/studentsReducer.jsx";
 
 const AddStudentView = () => {
   const history = useHistory();
+
   const [isEdit, setIsEdit] = useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -20,13 +22,28 @@ const AddStudentView = () => {
   const [image, setImage] = useState("");
   const [roomNo, setRoomNo] = useState("");
   const [blockNo, setBlockNo] = useState("");
-  const [status, setStatus] = useState("Absent");
+  const [status, setStatus] = useState("Active");
 
   const dispatch = useDispatch();
   const studentAdd = useSelector((state) => state.studentAdd);
+
   const { loading, error, success } = studentAdd;
   const studentUpdate = useSelector((state) => state.studentUpdate);
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = studentUpdate;
+
+  useEffect(() => {
+    dispatch(clearAddStudentData());
+    setName("");
+    setAddress("");
+    setCategory("");
+    setCity("");
+    setContact("");
+    setFatherContact("");
+    setImage("");
+    setRoomNo("");
+    setBlockNo("");
+    setStatus("");
+  }, []);
 
   useEffect(() => {
     if (successUpdate) {
@@ -53,6 +70,7 @@ const AddStudentView = () => {
   }, [dispatch, history, success, successUpdate]);
 
   const submitHandler = () => {
+    
     if (isEdit) {
       const _id = history.location.state.studentProps._id;
       dispatch(
@@ -114,8 +132,8 @@ const AddStudentView = () => {
                   <Form.Group controlId="status" className="mb-3">
                     <Form.Label>Status</Form.Label>
                     <Form.Control as="select" value={status} onChange={(e) => setStatus(e.target.value)}>
-                      {["Present", "Absent"].map((x) => (
-                        <option key={x} value={x}>
+                      {["Active", "Inactive"].map((x) => (
+                        <option key={x} value={x} defaultChecked={status}>
                           {x}
                         </option>
                       ))}
@@ -147,10 +165,18 @@ const AddStudentView = () => {
                   <Form.Group controlId="contact" className="mb-3">
                     <Form.Label>Contact</Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       placeholder="Enter phone number"
                       value={contact}
-                      onChange={(e) => setContact(e.target.value)}
+                      pattern="[0-9]{10}"
+                      title="Phone number must be 10 digits"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Allow only numbers and ensure length is not more than 10
+                        if (/^\d{0,10}$/.test(value)) {
+                          setContact(value);
+                        }
+                      }}
                     />
                   </Form.Group>
                 </Col>
@@ -158,10 +184,18 @@ const AddStudentView = () => {
                   <Form.Group controlId="fatherContact" className="mb-3">
                     <Form.Label>Father Contact</Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       placeholder="Enter father phone number"
                       value={fatherContact}
-                      onChange={(e) => setFatherContact(e.target.value)}
+                      pattern="[0-9]{10}"
+                      title="Phone number must be 10 digits"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Allow only numbers and ensure length is not more than 10
+                        if (/^\d{0,10}$/.test(value)) {
+                          setFatherContact(value);
+                        }
+                      }}
                     />
                   </Form.Group>
                 </Col>
@@ -170,12 +204,16 @@ const AddStudentView = () => {
                 <Col md={6}>
                   <Form.Group controlId="roomNo" className="mb-3">
                     <Form.Label>Room No</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter room no"
-                      value={roomNo}
-                      onChange={(e) => setRoomNo(e.target.value)}
-                    />
+                    <Form.Control as="select" value={roomNo} onChange={(e) => setRoomNo(e.target.value)}>
+                      <option value="" disabled selected>
+                        Select Room No.
+                      </option>
+                      {["01", "02", "03", "04", "05"].map((x) => (
+                        <option key={x} value={x}>
+                          {x}
+                        </option>
+                      ))}
+                    </Form.Control>
                   </Form.Group>
                 </Col>
                 <Col md={6}>
