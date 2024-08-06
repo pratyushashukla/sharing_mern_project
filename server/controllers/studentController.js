@@ -3,24 +3,20 @@ import Student from "../models/student.js";
 import Attendance from "../models/attendance.js";
 
 const addStudent = asyncHandler(async (req, res) => {
-  const {
-    name,
-    address,
-    category,
-    city,
-    contact,
-    fatherContact,
-    image,
-    roomNo,
-    blockNo,
-    status,
-  } = req.body;
+  const { name, address, category, city, contact, fatherContact, image, roomNo, blockNo, status } = req.body;
 
   const studentExist = await Student.findOne({ name: name });
 
   if (studentExist) {
     res.status(400);
     throw new Error("Student already exists");
+  }
+
+  const studentsInRoom = await Student.countDocuments({ roomNo: roomNo });
+
+  if (studentsInRoom >= 4) {
+    res.status(400);
+    throw new Error(`Room ${roomNo}, is already at full capacity.`);
   }
 
   const student = await Student.create({
@@ -55,10 +51,20 @@ const addStudent = asyncHandler(async (req, res) => {
     throw new Error("Invalid Student data");
   }
 });
+
 const updateStudentProfile = asyncHandler(async (req, res) => {
   const student = await Student.findById(req.body._id);
 
   if (student) {
+    // Check if the room number is being changed
+    if (req.body.roomNo && req.body.roomNo !== student.roomNo) {
+      const studentsInRoom = await Student.countDocuments({ roomNo: req.body.roomNo });
+      if (studentsInRoom >= 4) {
+        res.status(400);
+        throw new Error(`Room ${req.body.roomNo} is already at full capacity.`);
+      }
+    }
+
     student.name = req.body.name || student.name;
     student.address = req.body.address || student.address;
     student.category = req.body.category || student.category;
@@ -89,6 +95,7 @@ const updateStudentProfile = asyncHandler(async (req, res) => {
     throw new Error("Student not found");
   }
 });
+
 const getAllStudents = asyncHandler(async (req, res) => {
   const pageSize = 15;
   const page = Number(req.query.pageNumber) || 1;
@@ -136,26 +143,27 @@ const getStudentById = asyncHandler(async (req, res) => {
 });
 
 const getStudentByRoomNo = asyncHandler(async (req, res) => {
+  const currentDate = new Date().toDateString(); // Get the current date in a more precise format
+  const roomId = req.params.roomId;
+
   const attendance = await Attendance.findOne({
-    date: Date().toString().substring(0, 15),
-    roomNo: { $in: [req.params.roomId] },
+    date: currentDate,
   });
-  const students = await Student.find({ roomNo: req.params.roomId });
-  if (students) {
-    attendance
-      ? res.json({ students: students, attendance: attendance })
-      : res.json({ students: students });
+
+  const students = await Student.find({ roomNo: roomId });
+
+  if (students.length > 0) {
+    if (attendance) {
+      res.json({ students: students, attendance: attendance });
+    } else {
+      res.json({ students: students });
+    }
   } else {
     res.status(404);
     throw new Error("Students not found");
   }
 });
 
-export {
-  addStudent,
-  updateStudentProfile,
-  getAllStudents,
-  deleteStudent,
-  getStudentById,
-  getStudentByRoomNo,
-};
+
+
+export { addStudent, updateStudentProfile, getAllStudents, deleteStudent, getStudentById, getStudentByRoomNo };

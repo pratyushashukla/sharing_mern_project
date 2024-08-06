@@ -1,3 +1,4 @@
+import { ATTENDANCE_DATA_ENTER_RESET } from "../constants/attendanceConstant";
 import {
   STUDENT_LIST_REQUEST,
   STUDENT_LIST_SUCCESS,
@@ -153,6 +154,7 @@ export const deleteStudent = (id) => async (dispatch, getState) => {
 
 export const getStudentsByRoomNo = (roomNo) => async (dispatch, getState) => {
   try {
+    dispatch({ type: ATTENDANCE_DATA_ENTER_RESET });
     if (!roomNo) {
       dispatch({
         type: STUDENT_ROOM_NO_ERROR,

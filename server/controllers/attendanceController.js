@@ -35,6 +35,7 @@ const enterAttendanceByRoomNo = asyncHandler(async (req, res) => {
   const attendance = await Attendance.findOne({
     date: date,
   });
+
   if (attendance) {
     const dataTemp = attendance.data;
     const detailsTemp = attendance.details;
@@ -46,6 +47,7 @@ const enterAttendanceByRoomNo = asyncHandler(async (req, res) => {
     }
     attendance.details = detailsTemp;
     attendance.data = dataTemp;
+    attendance.roomNo = req.body.roomNo
 
     const updatedAttendance = await attendance.save();
     res.json(updatedAttendance);

@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image, ListGroup, Card, Button, Form, Container } from "react-bootstrap";
 import Loading from "../components/loader";
 import Message from "../components/message";
-import { getStudentDetails, updateStudent, deleteStudent } from "../actions/studentActions";
+import { getStudentDetails, updateStudent, deleteStudent as deleteStudentAction } from "../actions/studentActions";
 import { STUDENT_UPDATE_RESET } from "../constants/studentConstant";
-import './StudentDetailsView.css'; // Import custom CSS
+import "./StudentDetailsView.css"; // Import custom CSS
 
 const StudentDetailsView = ({ match, history }) => {
   const [status, setStatus] = useState("");
@@ -47,7 +47,7 @@ const StudentDetailsView = ({ match, history }) => {
 
   const deleteStudent = () => {
     if (window.confirm("Are you sure")) {
-      dispatch(deleteStudent(student._id));
+      dispatch(deleteStudentAction(student._id));
     }
   };
 
@@ -75,16 +75,20 @@ const StudentDetailsView = ({ match, history }) => {
                   <Card.Body>
                     <ListGroup variant="flush">
                       <ListGroup.Item>
-                        <strong>Phone No: </strong>{student.contact}
+                        <strong>Phone No: </strong>
+                        {student.contact}
                       </ListGroup.Item>
                       <ListGroup.Item>
-                        <strong>Father Contact: </strong>{student.fatherContact}
+                        <strong>Father Contact: </strong>
+                        {student.fatherContact}
                       </ListGroup.Item>
                       <ListGroup.Item>
-                        <strong>City: </strong>{student.city}
+                        <strong>City: </strong>
+                        {student.city}
                       </ListGroup.Item>
                       <ListGroup.Item>
-                        <strong>Address: </strong>{student.address}
+                        <strong>Address: </strong>
+                        {student.address}
                       </ListGroup.Item>
                     </ListGroup>
                   </Card.Body>
@@ -113,7 +117,9 @@ const StudentDetailsView = ({ match, history }) => {
                           <Col>
                             <Form.Control as="select" value={status} onChange={(e) => setStatus(e.target.value)}>
                               {["Present", "Absent"].map((x) => (
-                                <option key={x} value={x}>{x}</option>
+                                <option key={x} value={x}>
+                                  {x}
+                                </option>
                               ))}
                             </Form.Control>
                           </Col>
@@ -135,7 +141,7 @@ const StudentDetailsView = ({ match, history }) => {
               <Button variant="primary" className="mr-2" onClick={navigateToEdit}>
                 <i className="fas fa-edit"></i> Edit
               </Button>
-              <Button variant="danger" onClick={deleteStudent}>
+              <Button variant="danger" onClick={() => deleteStudent()}>
                 <i className="fas fa-trash"></i> Delete
               </Button>
             </Col>
