@@ -19,7 +19,9 @@ const AnalysisView = () => {
   const { attendance } = attendanceAnalysis;
   const attendanceDelete = useSelector((state) => state.attendanceDelete);
   const { loading: loadingDelete, success: successDelete, error: errorDelete } = attendanceDelete;
-
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const startOfYear = new Date(currentYear, 0, 1); // January 1st of the current year
 
   useEffect(() => {
     // if (attendance) {
@@ -48,7 +50,7 @@ const AnalysisView = () => {
 
   const startDelete = () => {
     setModal(false);
-    dispatch(deleteAttendanceByDate(days));
+    dispatch(deleteAttendanceByDate(days,startDate));
   };
 
   const options = {
@@ -78,7 +80,7 @@ const AnalysisView = () => {
           </h5>
         </Col>
         <Col md={4}>
-          <DatePicker selected={startDate} onChange={(date) => changeDate(date)} className="form-control" />
+          <DatePicker selected={startDate} onChange={(date) => changeDate(date)} className="form-control" maxDate={currentDate} minDate={startOfYear} />
         </Col>
       </Row>
 

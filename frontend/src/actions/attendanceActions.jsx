@@ -75,7 +75,7 @@ export const getAnalysisByDate = (date) => async (dispatch, getState) => {
   }
 };
 
-export const deleteAttendanceByDate = (days) => async (dispatch, getState) => {
+export const deleteAttendanceByDate = (days, startDate) => async (dispatch, getState) => {
   try {
     dispatch({ type: ATTENDANCE_DELETE_REQUEST });
     const {
@@ -87,7 +87,7 @@ export const deleteAttendanceByDate = (days) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.delete(`/attendance/${days}`, config);
-
+    dispatch(getAnalysisByDate(startDate));
     dispatch({
       type: ATTENDANCE_DELETE_SUCCESS,
       payload: data,
